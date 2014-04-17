@@ -1,0 +1,13 @@
+.article-comment
+  - if login?
+    #article-edit{:article => @article.nil? ? @article_id : @article.id, :reply_to => 0}
+      #article-replay{:name => 'article-replay'}
+      = render_template_edit_nr(COMMENT_TEMPLATE)
+      %button.btn-primary.btn#send-button{:href => comments_path('js'),:onclick => 'return post_comment(this);', style: 'display: none'}
+        发送
+  - else
+    .article-nologin
+      #loading
+      #content{style: 'display: none'}
+        = raw "请先#{link_to('登陆', login_path)},或者注册#{link_to('注册', signup_path)},然后才能评论。"
+      = render partial: 'articles/get_cookies'

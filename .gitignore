@@ -1,0 +1,7 @@
+.idea/
+.gitignore.swp
+.bundle/
+log/*.log
+pkg/
+test/
+*.gem

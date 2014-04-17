@@ -1,0 +1,15 @@
+<%- element_id = UUIDTools::UUID.random_create %>
+<script id="<%= element_id %>" type="text/javascript">
+(function() {
+    var load_script = function() {
+        if(<%= raw check_code %>) {
+            console.log('Checker not loaded, retry in 2sec.');
+            setTimeout(load_script, 2000);
+        }else {
+            <%= render file: "#{insert_content_path}", locals: options %>
+            $('#<%= element_id %>').parents('.edit_element,.skim_element').show();
+        }
+    };
+    load_script();
+})();
+</script>

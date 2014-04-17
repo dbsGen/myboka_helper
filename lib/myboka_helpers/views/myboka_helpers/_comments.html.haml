@@ -1,0 +1,9 @@
+.article-comments
+  - if @comments.size == 0
+    %span.article-no-comment
+      还没有评论。
+  - else
+    - @comments.each do |comment|
+      = render_comment comment
+
+= comments_pagination_tag(@article.comments.count / 10 + 1 , 1)
