@@ -4,22 +4,24 @@ require 'nokogiri'
 
 module MybokaHelpers
   module Content
-    # 内容摘要
-    def text_clip(content, limit = 140)
-      return '' if content.nil?
-      images = []
-      doc = Nokogiri::HTML(content)
-      doc.css('img').each do |img|
-        images << img
-      end
-      c = strip_tags(content)
-      text = c.length > limit ? "#{c[0..limit]}..." : c
-      if block_given?
-        yield((text.nil? or text.length == 0 ? '' : text), images)
-      else
-        res = (text.nil? or text.length == 0) ? '' : "#{text} <br/>"
-        images.each {|img| res << img.to_s}
-        res
+    module Controller
+      # 内容摘要
+      def text_clip(content, limit = 140)
+        return '' if content.nil?
+        images = []
+        doc = Nokogiri::HTML(content)
+        doc.css('img').each do |img|
+          images << img
+        end
+        c = strip_tags(content)
+        text = c.length > limit ? "#{c[0..limit]}..." : c
+        if block_given?
+          yield((text.nil? or text.length == 0 ? '' : text), images)
+        else
+          res = (text.nil? or text.length == 0) ? '' : "#{text} <br/>"
+          images.each {|img| res << img.to_s}
+          res
+        end
       end
     end
 

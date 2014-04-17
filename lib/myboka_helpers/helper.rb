@@ -19,5 +19,6 @@ module MybokaHelpers
   module ControlHelper
     include MybokaHelpers::Template::Controller
     include MybokaHelpers::Users::Controller
+    include MybokaHelpers::Content::Controller
   end
 end
